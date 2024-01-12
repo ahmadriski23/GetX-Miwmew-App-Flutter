@@ -158,17 +158,22 @@ class LoginView extends GetView<LoginController> {
             const SizedBox(
               height: 40.0,
             ),
-            Container(
-              height: 55,
-              width: Get.width,
-              decoration: BoxDecoration(
-                  color: AppColors.kPrimaryColor,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Center(
-                child: Text(
-                  'Sign In',
-                  style: AppText.boldText
-                      .copyWith(fontSize: 16, color: AppColors.kWhiteColor),
+            InkWell(
+              onTap: () {
+                Get.toNamed('/bottom-bar');
+              },
+              child: Container(
+                height: 55,
+                width: Get.width,
+                decoration: BoxDecoration(
+                    color: AppColors.kPrimaryColor,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                  child: Text(
+                    'Sign In',
+                    style: AppText.boldText
+                        .copyWith(fontSize: 16, color: AppColors.kWhiteColor),
+                  ),
                 ),
               ),
             ),
