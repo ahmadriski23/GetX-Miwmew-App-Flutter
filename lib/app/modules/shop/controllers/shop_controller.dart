@@ -4,7 +4,7 @@ class ShopController extends GetxController {
   //TODO: Implement ShopController
 
   final count = 0.obs;
-  var selectedProduct = "food".obs;
+  var selectedProduct = "Food".obs;
   void changeProduct(String product) {
     selectedProduct.value = product;
   }
@@ -14,7 +14,7 @@ class ShopController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    selectedProduct.value = "food";
+    selectedProduct.value = "Food";
   }
 
   @override
