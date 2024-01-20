@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color kPrimaryColor = Colors.purple;
-  static Color kSecondColor = Colors.purpleAccent.shade200;
+  static Color kPrimaryColor = Colors.purpleAccent.shade200;
+  static Color kSecondColor = Colors.purple;
+
   static Color kWhiteColor = Colors.white;
   static Color kBlackColor = Colors.black;
   static Color kBlueColor = Colors.blue;

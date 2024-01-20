@@ -44,7 +44,7 @@ class StartedView extends GetView<StartedController> {
                   height: 50,
                   width: Get.width,
                   decoration: BoxDecoration(
-                    color: AppColors.kSecondColor,
+                    color: AppColors.kPrimaryColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(

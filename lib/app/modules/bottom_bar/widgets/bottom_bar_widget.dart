@@ -33,7 +33,7 @@ bottomNavBar(int selectedPage) {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                    color: AppColors.kSecondColor,
+                    color: AppColors.kPrimaryColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -63,7 +63,7 @@ bottomNavBar(int selectedPage) {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                    color: AppColors.kSecondColor,
+                    color: AppColors.kPrimaryColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -93,7 +93,7 @@ bottomNavBar(int selectedPage) {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                    color: AppColors.kSecondColor,
+                    color: AppColors.kPrimaryColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -123,7 +123,7 @@ bottomNavBar(int selectedPage) {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                    color: AppColors.kSecondColor,
+                    color: AppColors.kPrimaryColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(

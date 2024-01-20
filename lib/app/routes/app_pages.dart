@@ -4,6 +4,8 @@ import '../modules/bottom_bar/bindings/bottom_bar_binding.dart';
 import '../modules/bottom_bar/views/bottom_bar_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
+import '../modules/detail_category/bindings/detail_category_binding.dart';
+import '../modules/detail_category/views/detail_category_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.CATEGORY,
       page: () => const CategoryView(),
       binding: CategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_CATEGORY,
+      page: () => const DetailCategoryView(),
+      binding: DetailCategoryBinding(),
     ),
   ];
 }
