@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:miwmew_app/app/shared/utils/text_style.dart';
-
 import '../../../shared/utils/colors.dart';
 import '../controllers/home_controller.dart';
 
@@ -175,7 +173,7 @@ class HomeView extends GetView<HomeController> {
                                 color: controller.selectedCategory.value.name ==
                                         controller.category[index].name
                                     ? AppColors.kPrimaryColor
-                                    : AppColors.kGreyColor,
+                                    : AppColors.kGreyShade200,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Padding(
@@ -194,9 +192,13 @@ class HomeView extends GetView<HomeController> {
                                     Text(
                                       controller.category[index].name,
                                       style: AppText.regulerText.copyWith(
-                                        fontSize: 12,
-                                        color: AppColors.kWhiteColor,
-                                      ),
+                                          fontSize: 12,
+                                          color: controller.selectedCategory
+                                                      .value.name ==
+                                                  controller
+                                                      .category[index].name
+                                              ? AppColors.kWhiteColor
+                                              : AppColors.kBlackColor),
                                     ),
                                   ],
                                 ),
@@ -229,6 +231,12 @@ class HomeView extends GetView<HomeController> {
                                       height: 150,
                                       width: Get.width,
                                       decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: AppColors.kGreyColor,
+                                              offset: const Offset(2, 6),
+                                              blurRadius: 12)
+                                        ],
                                         color: AppColors.kPrimaryColor,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
@@ -275,36 +283,48 @@ class HomeView extends GetView<HomeController> {
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(300, 0, 0, 0),
-                                    child: Image.asset(
-                                      'assets/images/cat1.png',
-                                      height: 200,
-                                      width: Get.width,
-                                      fit: BoxFit.fill,
+                                    child: Hero(
+                                      tag: 'cat_image_$index',
+                                      child: Image.asset(
+                                        'assets/images/cat1.png',
+                                        height: 200,
+                                        width: Get.width,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(
                                         20, 155, 20, 0),
-                                    child: Container(
-                                      height: 35,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            offset: const Offset(2, 2),
-                                            color: AppColors.kGreyColor,
-                                            blurRadius: 10,
-                                          )
-                                        ],
-                                        color: AppColors.kWhiteColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'See More',
-                                          style: AppText.boldText.copyWith(
-                                              fontSize: 14,
-                                              color: AppColors.kPrimaryColor),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.toNamed('detail-category',
+                                            arguments: {
+                                              'tagHero': 'cat_image_$index'
+                                            });
+                                      },
+                                      child: Container(
+                                        height: 35,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: const Offset(2, 2),
+                                              color: AppColors.kGreyColor,
+                                              blurRadius: 10,
+                                            )
+                                          ],
+                                          color: AppColors.kWhiteColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'See More',
+                                            style: AppText.boldText.copyWith(
+                                                fontSize: 14,
+                                                color: AppColors.kPrimaryColor),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -316,7 +336,7 @@ class HomeView extends GetView<HomeController> {
                     return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: 2,
                         itemBuilder: (context, index) {
                           return SizedBox(
                               height: 250,
@@ -416,7 +436,7 @@ class HomeView extends GetView<HomeController> {
                     return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: 1,
                         itemBuilder: (context, index) {
                           return SizedBox(
                               height: 250,
@@ -516,7 +536,7 @@ class HomeView extends GetView<HomeController> {
                     return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: 3,
                         itemBuilder: (context, index) {
                           return SizedBox(
                               height: 250,
