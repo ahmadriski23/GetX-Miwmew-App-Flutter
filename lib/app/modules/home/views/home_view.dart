@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miwmew_app/app/shared/utils/text_style.dart';
+import 'package:miwmew_app/app/shared/widgets/profile_card.dart';
 import '../../../shared/utils/colors.dart';
 import '../controllers/home_controller.dart';
 
@@ -16,54 +17,7 @@ class HomeView extends GetView<HomeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 65,
-                width: Get.width,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          offset: const Offset(2, 2),
-                          color: AppColors.kGreyColor,
-                          blurRadius: 15)
-                    ],
-                    color: AppColors.kPrimaryColor,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ClipOval(
-                        child: Container(
-                          color: AppColors.kWhiteColor,
-                          child: Image.asset(
-                            'assets/images/cat1.png',
-                            fit: BoxFit.cover,
-                            height: 50,
-                            width: 50,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      Text(
-                        'Ahmad Riski',
-                        style: AppText.boldText.copyWith(
-                          fontSize: 14,
-                          color: AppColors.kWhiteColor,
-                        ),
-                      ),
-                      const Spacer(),
-                      Icon(
-                        Icons.shopping_cart_outlined,
-                        color: AppColors.kWhiteColor,
-                        size: 30,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              const QProfileCard(),
               const SizedBox(
                 height: 20.0,
               ),
@@ -82,61 +36,6 @@ class HomeView extends GetView<HomeController> {
               ),
               const SizedBox(
                 height: 20.0,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 55,
-                      width: Get.width,
-                      decoration: BoxDecoration(
-                        color: AppColors.kGreyShade200,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.search,
-                              color: AppColors.kBlackColor,
-                              size: 25,
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              'Search',
-                              style: AppText.regulerText.copyWith(
-                                  fontSize: 14, color: AppColors.kBlackColor),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10.0,
-                  ),
-                  Container(
-                    height: 55,
-                    decoration: BoxDecoration(
-                        color: AppColors.kPrimaryColor,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: Icon(
-                        Icons.filter_alt_outlined,
-                        color: AppColors.kWhiteColor,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                ],
               ),
               const SizedBox(
                 height: 20.0,
@@ -218,7 +117,7 @@ class HomeView extends GetView<HomeController> {
                     return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: 2,
                         itemBuilder: (context, index) {
                           return SizedBox(
                               height: 250,
@@ -536,7 +435,7 @@ class HomeView extends GetView<HomeController> {
                     return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 3,
+                        itemCount: 2,
                         itemBuilder: (context, index) {
                           return SizedBox(
                               height: 250,

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miwmew_app/app/shared/utils/colors.dart';
 
-Widget backButton() {
+// ignore: non_constant_identifier_names
+Widget QBackButton() {
   return InkWell(
       onTap: () async {
         Get.back();

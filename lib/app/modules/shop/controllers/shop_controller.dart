@@ -9,7 +9,7 @@ class ShopController extends GetxController {
     selectedProduct.value = product;
   }
 
-  final List<String> products = ["Food", "Shampoo", "Cage"];
+  final List<String> products = ["Food", "Toy", "Shampoo", "Cage"];
 
   @override
   void onInit() {

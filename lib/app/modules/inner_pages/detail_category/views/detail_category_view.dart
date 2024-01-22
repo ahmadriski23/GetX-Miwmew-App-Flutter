@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:miwmew_app/app/shared/utils/colors.dart';
 import 'package:miwmew_app/app/shared/utils/text_style.dart';
 import 'package:miwmew_app/app/shared/widgets/back_button.dart';
+import 'package:miwmew_app/app/shared/widgets/process_button.dart';
 
 import '../controllers/detail_category_controller.dart';
 
@@ -220,30 +221,15 @@ class DetailCategoryView extends GetView<DetailCategoryController> {
                           const SizedBox(
                             height: 40.0,
                           ),
-                          Container(
-                            height: 50,
-                            width: Get.width,
-                            decoration: BoxDecoration(
-                              color: AppColors.kPrimaryColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Adopt Now',
-                                style: AppText.boldText.copyWith(
-                                    fontSize: 16, color: AppColors.kWhiteColor),
-                              ),
-                            ),
-                          ),
+                          QProcessButton(onTap: () {}, title: 'Adopt Now'),
                         ],
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20.0, 40, 20, 20),
-                  child: backButton(),
-                )
+                    padding: const EdgeInsets.fromLTRB(20.0, 40, 20, 20),
+                    child: QBackButton())
               ],
             ),
           )

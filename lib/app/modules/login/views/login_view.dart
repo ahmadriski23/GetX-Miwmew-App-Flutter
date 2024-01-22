@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miwmew_app/app/shared/utils/colors.dart';
 import 'package:miwmew_app/app/shared/utils/text_style.dart';
+import 'package:miwmew_app/app/shared/widgets/process_button.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -158,25 +159,11 @@ class LoginView extends GetView<LoginController> {
             const SizedBox(
               height: 40.0,
             ),
-            InkWell(
-              onTap: () {
-                Get.toNamed('/bottom-bar');
-              },
-              child: Container(
-                height: 55,
-                width: Get.width,
-                decoration: BoxDecoration(
-                    color: AppColors.kPrimaryColor,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Center(
-                  child: Text(
-                    'Sign In',
-                    style: AppText.boldText
-                        .copyWith(fontSize: 16, color: AppColors.kWhiteColor),
-                  ),
-                ),
-              ),
-            ),
+            QProcessButton(
+                onTap: () {
+                  Get.toNamed('/bottom-bar');
+                },
+                title: 'Sign In'),
             const SizedBox(
               height: 20.0,
             ),
