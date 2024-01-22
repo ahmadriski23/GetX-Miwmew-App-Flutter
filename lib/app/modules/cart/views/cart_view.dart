@@ -239,7 +239,7 @@ class CartView extends GetView<CartController> {
                           .copyWith(fontSize: 16, color: AppColors.kBlackColor),
                     ),
                     Text(
-                      'Rp.25.000',
+                      'Rp.25.0000',
                       style: AppText.regulerText.copyWith(
                         fontSize: 16,
                         color: AppColors.kPrimaryColor,
