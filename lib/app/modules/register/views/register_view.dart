@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:miwmew_app/app/shared/widgets/process_button.dart';
 import '../../../shared/utils/colors.dart';
 import '../../../shared/utils/text_style.dart';
 import '../controllers/register_controller.dart';
@@ -13,8 +14,8 @@ class RegisterView extends GetView<RegisterController> {
           child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,10 +30,16 @@ class RegisterView extends GetView<RegisterController> {
                       style: AppText.regulerText.copyWith(
                           fontSize: 14, color: AppColors.kPrimaryColor),
                     ),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
                     Text(
                       'Sign Up',
                       style: AppText.boldText.copyWith(
                           fontSize: 16, color: AppColors.kPrimaryColor),
+                    ),
+                    const SizedBox(
+                      height: 5.0,
                     ),
                     Text(
                       'To Continue',
@@ -243,8 +250,33 @@ class RegisterView extends GetView<RegisterController> {
               ],
             ),
             const SizedBox(
+              height: 40.0,
+            ),
+            QProcessButton(onTap: () {}, title: 'Sign Up'),
+            const SizedBox(
               height: 20.0,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Already have an account?',
+                  style: AppText.regulerText
+                      .copyWith(fontSize: 14, color: AppColors.kGreyColor),
+                ),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                InkWell(
+                  onTap: () => Get.toNamed('login'),
+                  child: Text(
+                    'Sign In',
+                    style: AppText.boldText
+                        .copyWith(fontSize: 14, color: AppColors.kPrimaryColor),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       )),

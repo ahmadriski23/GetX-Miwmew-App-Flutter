@@ -1,13 +1,17 @@
 import 'package:get/get.dart';
+import 'package:miwmew_app/app/modules/inner_pages/detail_product/bindings/detail_product_binding.dart';
 
 import '../modules/bottom_bar/bindings/bottom_bar_binding.dart';
 import '../modules/bottom_bar/views/bottom_bar_view.dart';
+import '../modules/cart/bindings/cart_binding.dart';
+import '../modules/cart/views/cart_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
-import '../modules/detail_category/bindings/detail_category_binding.dart';
-import '../modules/detail_category/views/detail_category_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/inner_pages/detail_category/bindings/detail_category_binding.dart';
+import '../modules/inner_pages/detail_category/views/detail_category_view.dart';
+import '../modules/inner_pages/detail_product/views/detail_product_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -78,6 +82,16 @@ class AppPages {
       name: _Paths.DETAIL_CATEGORY,
       page: () => const DetailCategoryView(),
       binding: DetailCategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_PRODUCT,
+      page: () => const DetailProductView(),
+      binding: DetailProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.CART,
+      page: () => const CartView(),
+      binding: CartBinding(),
     ),
   ];
 }
