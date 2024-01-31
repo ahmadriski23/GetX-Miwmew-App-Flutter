@@ -134,7 +134,7 @@ bottomNavBar(int selectedPage) {
               : InkWell(
                   onTap: () {
                     Get.find<BottomBarController>().selectedPage.value = 3;
-                    Get.toNamed('/category', id: 1);
+                    Get.toNamed('/profile', id: 1);
                   },
                   child: Container(
                     height: 50,

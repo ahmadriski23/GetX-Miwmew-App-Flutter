@@ -205,53 +205,59 @@ class CartView extends GetView<CartController> {
               height: 20.0,
             ),
             // * TOTAL
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                'Total : 4',
-                style: AppText.regulerText
-                    .copyWith(fontSize: 16, color: AppColors.kBlackColor),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'Total : 4',
+                  style: AppText.regulerText
+                      .copyWith(fontSize: 16, color: AppColors.kBlackColor),
+                ),
               ),
             ),
             const SizedBox(
               height: 25.0,
             ),
             // * SUBTOTAL
-            Container(
-              height: 75,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      offset: const Offset(-2, 5),
-                      blurRadius: 10,
-                      color: AppColors.kGreyColor),
-                ],
-                color: AppColors.kWhiteColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  children: [
-                    Text(
-                      'Subtotal: ',
-                      style: AppText.regulerText
-                          .copyWith(fontSize: 16, color: AppColors.kBlackColor),
-                    ),
-                    Text(
-                      'Rp.25.0000',
-                      style: AppText.regulerText.copyWith(
-                        fontSize: 16,
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                    const Spacer(),
-                    Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
-                      child: QProcessButton(onTap: () {}, title: 'Check Out'),
-                    ))
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                height: 75,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        offset: const Offset(-2, 5),
+                        blurRadius: 10,
+                        color: AppColors.kGreyColor),
                   ],
+                  color: AppColors.kWhiteColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Subtotal: ',
+                        style: AppText.regulerText.copyWith(
+                            fontSize: 16, color: AppColors.kBlackColor),
+                      ),
+                      Text(
+                        'Rp.25.000',
+                        style: AppText.regulerText.copyWith(
+                          fontSize: 16,
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      ),
+                      const Spacer(),
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                        child: QProcessButton(onTap: () {}, title: 'Check Out'),
+                      ))
+                    ],
+                  ),
                 ),
               ),
             )
