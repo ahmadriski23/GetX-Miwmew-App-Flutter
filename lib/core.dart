@@ -3,7 +3,6 @@ We believe, the class name must be unique.
 If there is a conflicting class name in this file,
 it means you have to rename it to something more unique.
 */
-export 'package:miwmew_app/app/models/category.dart';
 export 'package:miwmew_app/app/modules/bottom_bar/bindings/bottom_bar_binding.dart';
 export 'package:miwmew_app/app/modules/bottom_bar/controllers/bottom_bar_controller.dart';
 export 'package:miwmew_app/app/modules/bottom_bar/views/bottom_bar_view.dart';

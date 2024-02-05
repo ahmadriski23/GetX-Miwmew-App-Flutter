@@ -166,7 +166,7 @@ class RegisterView extends GetView<RegisterController> {
                                     color: AppColors.kGreenColor,
                                   )
                                 : Icon(
-                                    Icons.close,
+                                    Icons.cancel,
                                     color: AppColors.kRedColor,
                                   ),
                             hintText: 'Enter your email',
@@ -225,7 +225,7 @@ class RegisterView extends GetView<RegisterController> {
                         decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.lock,
-                              color: AppColors.kSecondColor,
+                              color: AppColors.kPrimaryColor,
                             ),
                             suffixIcon: IconButton(
                               onPressed: () {
