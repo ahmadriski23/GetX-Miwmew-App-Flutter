@@ -1,8 +1,13 @@
 import 'package:get/get.dart';
+import 'package:miwmew_app/app/services/supply_category_service.dart';
 
 class ShopController extends GetxController {
   //TODO: Implement ShopController
 
+  final SupplyCategoryService supplyCategoryService =
+      Get.put(SupplyCategoryService());
+
+  RxInt selectedSupplyCategoryIndex = 0.obs;
   final count = 0.obs;
   var selectedProduct = "Food".obs;
   void changeProduct(String product) {

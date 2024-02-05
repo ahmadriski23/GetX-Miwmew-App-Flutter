@@ -48,493 +48,251 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               const SizedBox(
-                height: 10.0,
-              ),
-              SizedBox(
-                height: 100,
-                child: ListView.builder(
-                    itemCount: controller.category.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Obx(
-                        () => GestureDetector(
-                          onTap: () {
-                            controller
-                                .changeCategory(controller.category[index]);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                            child: Container(
-                              height: 100,
-                              width: 85,
-                              decoration: BoxDecoration(
-                                color: controller.selectedCategory.value.name ==
-                                        controller.category[index].name
-                                    ? AppColors.kPrimaryColor
-                                    : AppColors.kGreyShade200,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      controller.category[index].image,
-                                      height: 50,
-                                      width: 50,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Text(
-                                      controller.category[index].name,
-                                      style: AppText.regulerText.copyWith(
-                                          fontSize: 12,
-                                          color: controller.selectedCategory
-                                                      .value.name ==
-                                                  controller
-                                                      .category[index].name
-                                              ? AppColors.kWhiteColor
-                                              : AppColors.kBlackColor),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-              ),
-              const SizedBox(
                 height: 20.0,
               ),
-              Obx(() {
-                switch (controller.selectedCategory.value.name) {
-                  case "Cats":
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                              height: 250,
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                                    child: Container(
-                                      height: 150,
-                                      width: Get.width,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: AppColors.kGreyColor,
-                                              offset: const Offset(2, 6),
-                                              blurRadius: 12)
-                                        ],
-                                        color: AppColors.kPrimaryColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: Get.width / 2,
+              FutureBuilder(
+                  future: controller.categoryService.getCategory(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Text('Error Fetching Data');
+                    }
+                    return controller.categoryService.categories.isEmpty
+                        ? const Text('Sorry, Category Not Found')
+                        : SizedBox(
+                            height: 100,
+                            child: Obx(
+                              () => ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: controller
+                                      .categoryService.categories.length,
+                                  itemBuilder: (context, index) {
+                                    return Obx(
+                                      () => Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 0, 20, 0),
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.selectedCategoryIndex
+                                                .value = index;
+                                          },
+                                          child: Container(
+                                            height: 100,
+                                            width: 85,
+                                            decoration: BoxDecoration(
+                                              color: controller
+                                                          .selectedCategoryIndex
+                                                          .value ==
+                                                      index
+                                                  ? AppColors.kPrimaryColor
+                                                  : AppColors.kGreyShade200,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    'Browny',
-                                                    style: AppText.boldText
-                                                        .copyWith(
-                                                            fontSize: 16,
-                                                            color: AppColors
-                                                                .kWhiteColor),
+                                                  Image.network(
+                                                    controller
+                                                        .categoryService
+                                                        .categories[index]
+                                                        .image,
+                                                    height: 50,
+                                                    width: 50,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                   const SizedBox(
                                                     height: 10.0,
                                                   ),
                                                   Text(
-                                                    'Browny is lorem ipsum dot sit amet lorem ipsum sit dot amet',
+                                                    controller.categoryService
+                                                        .categories[index].name,
                                                     style: AppText.regulerText
                                                         .copyWith(
-                                                      fontSize: 14,
-                                                      color:
-                                                          AppColors.kWhiteColor,
-                                                    ),
+                                                            fontSize: 12,
+                                                            color: controller
+                                                                        .selectedCategoryIndex
+                                                                        .value ==
+                                                                    index
+                                                                ? AppColors
+                                                                    .kWhiteColor
+                                                                : AppColors
+                                                                    .kBlackColor),
                                                   ),
                                                 ],
                                               ),
-                                            )
-                                          ],
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(300, 0, 0, 0),
-                                    child: Hero(
-                                      tag: 'cat_image_$index',
-                                      child: Image.asset(
-                                        'assets/images/cat1.png',
-                                        height: 200,
-                                        width: Get.width,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 155, 20, 0),
-                                    child: InkWell(
-                                      onTap: () {
-                                        Get.toNamed('detail-category',
-                                            arguments: {
-                                              'tagHero': 'cat_image_$index'
-                                            });
-                                      },
+                                    );
+                                  }),
+                            ),
+                          );
+                  }),
+              const SizedBox(
+                height: 20.0,
+              ),
+              FutureBuilder(
+                  future: controller.categoryService.getCategory(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Text('Error Fetching Data');
+                    }
+                    return Obx(() {
+                      return SizedBox(
+                        height: 500,
+                        child: ListView.builder(
+                          itemCount: controller.selectedCategoryIndex.value >=
+                                      0 &&
+                                  controller.selectedCategoryIndex.value <
+                                      controller
+                                          .categoryService.categories.length
+                              ? controller
+                                  .categoryService
+                                  .categories[
+                                      controller.selectedCategoryIndex.value]
+                                  .products
+                                  .length
+                              : 0,
+                          itemBuilder: (context, index) {
+                            var product = controller
+                                .categoryService
+                                .categories[
+                                    controller.selectedCategoryIndex.value]
+                                .products[index];
+                            return SizedBox(
+                                height: 250,
+                                child: Stack(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 25, 0, 0),
                                       child: Container(
-                                        height: 35,
-                                        width: 150,
+                                        height: 150,
+                                        width: Get.width,
                                         decoration: BoxDecoration(
                                           boxShadow: [
                                             BoxShadow(
-                                              offset: const Offset(2, 2),
-                                              color: AppColors.kGreyColor,
-                                              blurRadius: 10,
-                                            )
+                                                color: AppColors.kGreyColor,
+                                                offset: const Offset(2, 6),
+                                                blurRadius: 12)
                                           ],
-                                          color: AppColors.kWhiteColor,
+                                          color: AppColors.kPrimaryColor,
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
-                                        child: Center(
-                                          child: Text(
-                                            'See More',
-                                            style: AppText.boldText.copyWith(
-                                                fontSize: 14,
-                                                color: AppColors.kPrimaryColor),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                width: Get.width / 2,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      product.name,
+                                                      style: AppText.boldText
+                                                          .copyWith(
+                                                              fontSize: 16,
+                                                              color: AppColors
+                                                                  .kWhiteColor),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10.0,
+                                                    ),
+                                                    Text(
+                                                      product.description,
+                                                      style: AppText.regulerText
+                                                          .copyWith(
+                                                        fontSize: 14,
+                                                        color: AppColors
+                                                            .kWhiteColor,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
                                           ),
                                         ),
                                       ),
                                     ),
-                                  )
-                                ],
-                              ));
-                        });
-                  case "Grooming":
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                              height: 250,
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                                    child: Container(
-                                      height: 150,
-                                      width: Get.width,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.kPrimaryColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: Get.width / 2,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Browny',
-                                                    style: AppText.boldText
-                                                        .copyWith(
-                                                            fontSize: 16,
-                                                            color: AppColors
-                                                                .kWhiteColor),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10.0,
-                                                  ),
-                                                  Text(
-                                                    'Browny is lorem ipsum dot sit amet lorem ipsum sit dot amet',
-                                                    style: AppText.regulerText
-                                                        .copyWith(
-                                                      fontSize: 14,
-                                                      color:
-                                                          AppColors.kWhiteColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          300, 0, 0, 0),
+                                      child: Hero(
+                                        tag: 'cat_image_$index',
+                                        child: Image.network(
+                                          product.image,
+                                          height: 200,
+                                          width: Get.width,
+                                          fit: BoxFit.fill,
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(300, 0, 0, 0),
-                                    child: Image.asset(
-                                      'assets/images/cat1.png',
-                                      height: 200,
-                                      width: Get.width,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 155, 20, 0),
-                                    child: Container(
-                                      height: 35,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            offset: const Offset(2, 2),
-                                            color: AppColors.kGreyColor,
-                                            blurRadius: 10,
-                                          )
-                                        ],
-                                        color: AppColors.kWhiteColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'See More',
-                                          style: AppText.boldText.copyWith(
-                                              fontSize: 14,
-                                              color: AppColors.kPrimaryColor),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 155, 20, 0),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.toNamed('detail-category',
+                                              arguments: {
+                                                'tagHero': 'cat_image_$index'
+                                              });
+                                        },
+                                        child: Container(
+                                          height: 35,
+                                          width: 150,
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                offset: const Offset(2, 2),
+                                                color: AppColors.kGreyColor,
+                                                blurRadius: 10,
+                                              )
+                                            ],
+                                            color: AppColors.kWhiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              'See More',
+                                              style: AppText.boldText.copyWith(
+                                                  fontSize: 14,
+                                                  color:
+                                                      AppColors.kPrimaryColor),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              ));
-                        });
-                  case "Medicare":
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 1,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                              height: 250,
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                                    child: Container(
-                                      height: 150,
-                                      width: Get.width,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.kPrimaryColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: Get.width / 2,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Browny',
-                                                    style: AppText.boldText
-                                                        .copyWith(
-                                                            fontSize: 16,
-                                                            color: AppColors
-                                                                .kWhiteColor),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10.0,
-                                                  ),
-                                                  Text(
-                                                    'Browny is lorem ipsum dot sit amet lorem ipsum sit dot amet',
-                                                    style: AppText.regulerText
-                                                        .copyWith(
-                                                      fontSize: 14,
-                                                      color:
-                                                          AppColors.kWhiteColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(300, 0, 0, 0),
-                                    child: Image.asset(
-                                      'assets/images/cat1.png',
-                                      height: 200,
-                                      width: Get.width,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 155, 20, 0),
-                                    child: Container(
-                                      height: 35,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            offset: const Offset(2, 2),
-                                            color: AppColors.kGreyColor,
-                                            blurRadius: 10,
-                                          )
-                                        ],
-                                        color: AppColors.kWhiteColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'See More',
-                                          style: AppText.boldText.copyWith(
-                                              fontSize: 14,
-                                              color: AppColors.kPrimaryColor),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ));
-                        });
-                  case "Daycare":
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                              height: 250,
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                                    child: Container(
-                                      height: 150,
-                                      width: Get.width,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.kPrimaryColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: Get.width / 2,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Browny',
-                                                    style: AppText.boldText
-                                                        .copyWith(
-                                                            fontSize: 16,
-                                                            color: AppColors
-                                                                .kWhiteColor),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10.0,
-                                                  ),
-                                                  Text(
-                                                    'Browny is lorem ipsum dot sit amet lorem ipsum sit dot amet',
-                                                    style: AppText.regulerText
-                                                        .copyWith(
-                                                      fontSize: 14,
-                                                      color:
-                                                          AppColors.kWhiteColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(300, 0, 0, 0),
-                                    child: Image.asset(
-                                      'assets/images/cat1.png',
-                                      height: 200,
-                                      width: Get.width,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 155, 20, 0),
-                                    child: Container(
-                                      height: 35,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            offset: const Offset(2, 2),
-                                            color: AppColors.kGreyColor,
-                                            blurRadius: 10,
-                                          )
-                                        ],
-                                        color: AppColors.kWhiteColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'See More',
-                                          style: AppText.boldText.copyWith(
-                                              fontSize: 14,
-                                              color: AppColors.kPrimaryColor),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ));
-                        });
-                  default:
-                    return Container();
-                }
-              })
+                                    )
+                                  ],
+                                ));
+                          },
+                        ),
+                      );
+                    });
+                  }),
             ],
           ),
         ),

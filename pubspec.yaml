@@ -19,6 +19,7 @@ dependencies:
   custom_image_crop: ^0.0.13
   file_picker: ^6.1.1
   image_picker: ^1.0.7
+  http: ^1.2.0
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
