@@ -158,6 +158,7 @@ class ShopView extends GetView<ShopController> {
                             return InkWell(
                               onTap: () =>
                                   Get.toNamed('/detail-product', arguments: {
+                                "id": supplies.id,
                                 'tagHero': 'product_image_$index',
                               }),
                               child: Container(
@@ -188,8 +189,8 @@ class ShopView extends GetView<ShopController> {
                                             padding: const EdgeInsets.all(20.0),
                                             child: Hero(
                                               tag: 'product_image_$index',
-                                              child: Image.asset(
-                                                'assets/images/whiskas1.png',
+                                              child: Image.network(
+                                                supplies.image,
                                                 height: 75,
                                                 width: Get.width,
                                                 fit: BoxFit.fitHeight,
